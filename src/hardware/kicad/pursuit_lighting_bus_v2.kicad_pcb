@@ -1,0 +1,31 @@
+(kicad_pcb (version 20240108) (host pcbnew)
+  (general (thickness 1.6)
+    (layers (0 "F.Cu" signal) (31 "B.Cu" signal) (44 "Edge.Cuts" user "Edge.Cuts"))
+  )
+  (setup
+    (clearance_class "Logic_Control_Bus" (clearance 0.25) (trace_width 0.25))
+    ;; COMPLIANCE: Rule #2 Continuous 0.5mm Parallel Guard Ground Tracks Shielding Pursuit Signaling Arrays
+    (clearance_class "Bilateral_Guard_Ring" (clearance 0.5) (trace_width 0.50))
+    ;; COMPLIANCE: Rule #1 Heavy 3oz Copper Trace Width Parameters for High-Current Solid-State Lightbar Pulsers
+    (clearance_class "Heavy_3oz_Strobe_Bus" (clearance 3.0) (trace_width 4.00))
+  )
+
+  (net 0 "")
+  (net 1 "VCC_12V_AVIONICS")
+  (net 2 "GND_GUARD_SHIELD")
+  (net 3 "Pursuit_Strobe_Gate_Trigger_PWM")
+  (net 4 "Roof_Lightbar_Power_Anode_Red")
+  (net 5 "Roof_Lightbar_Power_Anode_Blue")
+
+  ;; --- Component Matrix Placements ---
+  
+  ;; U1: High-Current SiC MOSFET Dual-Channel Strobe Switch (Tactical Pursuit Lightbar Gate Array)
+  (module "Package_TO_SOT_THT:TO-247-5_Vertical" (layer "F.Cu") (at 50.0 50.0)
+    (pad "1" tht circle (at -5.0 0) (size 3.5 3.5) (drill 1.6) (layers "*.Cu" "*.Mask") (net 3 "Pursuit_Strobe_Gate_Trigger_PWM"))
+    (pad "2" tht circle (at -2.5 0) (size 3.5 3.5) (drill 1.6) (layers "*.Cu" "*.Mask") (net 2 "GND_GUARD_SHIELD")) ;; Guard Line Reference
+    (pad "3" tht circle (at 0 0) (size 4.5 4.5) (drill 1.5) (layers "*.Cu" "*.Mask") (net 2 "GND_GUARD_SHIELD")) ;; Guard Center
+    (pad "4" tht circle (at 2.5 0) (size 6.0 6.0) (drill 2.2) (layers "*.Cu" "*.Mask") (net 4 "Roof_Lightbar_Power_Anode_Red"))
+    (pad "5" tht circle (at 5.0 0) (size 6.0 6.0) (drill 2.2) (layers "*.Cu" "*.Mask") (net 5 "Roof_Lightbar_Power_Anode_Blue"))
+    (net_class "Heavy_3oz_Strobe_Bus" (pins "4" "5"))
+  )
+)
